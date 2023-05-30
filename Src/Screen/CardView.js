@@ -1,5 +1,4 @@
 import React, {useContext, useEffect, useState} from 'react';
-import {CartContext} from '../Components/Context/CartContext';
 import {
   View,
   Text,
@@ -10,11 +9,12 @@ import {
 } from 'react-native';
 import Cart from './Cart';
 import data from './data';
+import CartContext from '../Components/Context/CartContext';
 // import { getData } from './data';
 
 const animationTime = 500;
 
-export default function CardView({route}) {
+export default function CardView({route, navigation}) {
   // Accessing the item from the route.params object
   const item = route.params.item;
   // const {addToCart} = useContext(CartContext);
@@ -32,6 +32,8 @@ export default function CardView({route}) {
   // function onAddToCart(){
   //   addItemToCart;
   // }
+
+  const {addToCart} = useContext(CartContext);
 
   let [counter, setCounter] = React.useState(1);
   const animatedValue = React.useRef(new Animated.Value(0)).current;
@@ -135,7 +137,13 @@ export default function CardView({route}) {
             </Text>
           </View>
           <View style={{flex: 9, marginLeft: 20}}>
-            <Btn2 title={'Add to Cart'} />
+            <Btn2
+              title={'Add to Cart'}
+              onPress={() => {
+                addToCart(item);
+                navigation.navigate('Carts');
+              }}
+            />
           </View>
         </View>
       </View>
@@ -230,9 +238,10 @@ const SBtn = ({title, size}) => {
   );
 };
 
-const Btn2 = ({title}) => {
+const Btn2 = ({title, onPress}) => {
   return (
     <TouchableOpacity
+      onPress={onPress}
       style={{
         width: 160,
         height: 55,

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useContext} from 'react';
 // import {View, Text, Button, FlatList, StyleSheet} from 'react-native';
 //  import {Context} from '../Components/Context/CartContext';
 //  const Cart = ({navigation}) => {
@@ -73,8 +73,8 @@ import React from 'react';
 // });
 // export default Cart;
 
-import {View, Text} from 'react-native';
-import {CartContext} from '../Components/Context/CartContext';
+import {View, Text, SafeAreaView} from 'react-native';
+import CartContext from '../Components/Context/CartContext';
 
 // export default function Cart() {
 //   const {cartItems} = useContext(CartContext);
@@ -92,9 +92,30 @@ import {CartContext} from '../Components/Context/CartContext';
 //   );
 // }
 export default function Cart() {
+  const {cartItems} = useContext(CartContext);
+
+  console.log('cartItems', cartItems);
+
   return (
-    <View style={{backgroundColor: 'red', alignItems: 'center'}}>
+    <SafeAreaView style={{alignItems: 'center', flex: 1}}>
       <Text style={{fontSize: 20, color: '#000000'}}>Cart Screen</Text>
-    </View>
+      <View style={{marginTop: 100}}>
+        {cartItems.length > 0 ? (
+          cartItems.map(item => {
+            return (
+              <View key={item?.id}>
+                <Text style={{fontSize: 16, color: '#000000'}}>
+                  {item?.name}
+                </Text>
+              </View>
+            );
+          })
+        ) : (
+          <Text style={{fontSize: 10, color: '#000000'}}>
+            No Item Available
+          </Text>
+        )}
+      </View>
+    </SafeAreaView>
   );
 }
