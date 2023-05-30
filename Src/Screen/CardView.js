@@ -34,8 +34,8 @@ export default function CardView({route, navigation}) {
   // }
 
   const {addToCart} = useContext(CartContext);
-
   let [counter, setCounter] = React.useState(1);
+  const totalPrice = item.price * counter;
   const animatedValue = React.useRef(new Animated.Value(0)).current;
   const startAnimation = value => {
     return Animated.spring(animatedValue, {
@@ -66,6 +66,10 @@ export default function CardView({route, navigation}) {
     outputRange: [0.5, 1, 1.2],
     extrapolate: 'clamp',
   });
+  const [selectedSize,setSelectedSize]= useState('');
+  const handleSizeSelection =(size)=>{
+    setSelectedSize(size);
+  };
 
   return (
     <>
@@ -114,9 +118,9 @@ export default function CardView({route, navigation}) {
           </View>
         </View>
         <View flexDirection="row" style={{marginRight: 180, marginTop: 30}}>
-          <SBtn title={'M'} />
-          <SBtn title={'L'} />
-          <SBtn title={'XL'} />
+          <SBtn title={'M'} size={selectedSize} onPress={()=> handleSizeSelection('M')} />
+          <SBtn title={'L'} size={selectedSize} onPress={()=> handleSizeSelection('L')} />
+          <SBtn title={'XL'} size={selectedSize} onPress={()=> handleSizeSelection('XL')}/>
         </View>
         <View
           style={{
@@ -140,7 +144,7 @@ export default function CardView({route, navigation}) {
             <Btn2
               title={'Add to Cart'}
               onPress={() => {
-                addToCart(item);
+                addToCart({...item,total:counter,price:totalPrice,size:selectedSize });
                 navigation.navigate('Carts');
               }}
             />
@@ -211,24 +215,24 @@ const Btn = ({title, onPress}) => {
     </TouchableOpacity>
   );
 };
-const SBtn = ({title, size}) => {
+const SBtn = ({title,size,onPress}) => {
+  
+  
   return (
     <TouchableOpacity
       style={{
         width: 35,
         height: 40,
-        backgroundColor: '#EAEAEA',
+        backgroundColor: size === title ? '#989494':'#EAEAEA',
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 8,
-      }}>
-      {size}
-
+      }} onPress={onPress}>
       <Text
         style={{
           fontSize: 15,
-          color: '#6E7179',
+          color: size === title?'#FFFFFF':'#6E7179',
           fontWeight: '600',
           textAlign: 'left',
         }}>

@@ -1,5 +1,6 @@
 import React, {useContext} from 'react';
-// import {View, Text, Button, FlatList, StyleSheet} from 'react-native';
+// import { Text,Image, Button, FlatList, StyleSheet} from 'react-native';
+
 //  import {Context} from '../Components/Context/CartContext';
 //  const Cart = ({navigation}) => {
 //   const {items, getItemsCount, getTotalPrice} = useContext(Context);
@@ -73,8 +74,10 @@ import React, {useContext} from 'react';
 // });
 // export default Cart;
 
-import {View, Text, SafeAreaView} from 'react-native';
+import {View, Text,Image, SafeAreaView,ScrollView} from 'react-native';
 import CartContext from '../Components/Context/CartContext';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+
 
 // export default function Cart() {
 //   const {cartItems} = useContext(CartContext);
@@ -93,29 +96,44 @@ import CartContext from '../Components/Context/CartContext';
 // }
 export default function Cart() {
   const {cartItems} = useContext(CartContext);
-
-  console.log('cartItems', cartItems);
-
+  
   return (
-    <SafeAreaView style={{alignItems: 'center', flex: 1}}>
-      <Text style={{fontSize: 20, color: '#000000'}}>Cart Screen</Text>
-      <View style={{marginTop: 100}}>
+
+    <SafeAreaView style={{flex:1,backgroundColor:'#FFFFFF'}}>
+      <ScrollView style={{flex:1}}>
         {cartItems.length > 0 ? (
-          cartItems.map(item => {
-            return (
-              <View key={item?.id}>
-                <Text style={{fontSize: 16, color: '#000000'}}>
+          cartItems.map(item => (
+            <>
+              <View key={item?.id} style={{flexDirection:'row',flex:8,padding:15,backgroundColor:'#FFFFFF',borderBottomWidth:1,borderColor:'#C4C4C4'}}>
+                <Image source= {item.imagePath} style={{flex:5,margin:5}}/>
+                <View style={{flex:3,marginLeft:15,}}>
+                  <View style={{flex:1,marginBottom:-10}}>
+                <Text style={{fontSize: 16,fontWeight:'bold', color: '#6E7179',alignItems:'center',paddingTop:15,lineHeight:20}}>
                   {item?.name}
                 </Text>
-              </View>
-            );
-          })
+                </View>  
+                <View style={{flex:1,flexDirection:'row',marginTop:-10}}>
+                  <Text style={{color: '#6E7179',fontWeight:'bold',fontSize: 16,paddingBottom:0,textAlign:'center',paddingTop:0}}>{item?.price}</Text>
+                  <Text style={{color: '#6E7179',fontWeight:'bold',fontSize: 16,textAlign:'center',paddingLeft:5,paddingTop:0}}>{item?.currency}</Text>
+                  </View>  
+                  <View style={{flex:4,flexDirection:'row',alignItems:'center'}}>
+                    <Text style={{flex:2,fontSize:20,fontWeight:'bold',textAlign:'center',backgroundColor:'#989494',color:'#FFFFFF',borderRadius:5,borderBottomLeftRadius:5,borderBottomRightRadius:5,borderTopRightRadius:5,borderTopLeftRadius:5}}>{item?.size}</Text>
+                    <Text style={{flex:2,fontSize:20,fontWeight:'bold',textAlign:'center',backgroundColor:'#989494',color:'#FFFFFF',borderRadius:5,marginLeft:30,borderBottomLeftRadius:5,borderBottomRightRadius:5,borderTopRightRadius:5,borderTopLeftRadius:5}}>{item?.total}</Text>
+                  </View>
+                  </View>
+              </View> 
+           </>
+              
+          ))
         ) : (
-          <Text style={{fontSize: 10, color: '#000000'}}>
+          <Text style={{fontSize: 18, color: '#000000'}}>
             No Item Available
           </Text>
         )}
-      </View>
+        <View style={{flex:1,backgroundColor:'#F4F4F4'}}><Text></Text></View>
+    
+        </ScrollView>
     </SafeAreaView>
+ 
   );
 }

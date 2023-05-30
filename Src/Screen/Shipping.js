@@ -11,6 +11,11 @@ const initialState = {
   first: false,
   second: false,
 };
+// import axios from 'axios';
+
+// axios.get('https://reqres.in/api/users?page=2').then((response) => {
+//   console.log(response.data);
+// });
 
 export default function () {
   const [state, setState] = useState(initialState);
