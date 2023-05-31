@@ -47,7 +47,7 @@ export default function Login(props) {
           </View>
           <TouchableOpacity style={styles.loginBtn}>
             <Text
-              onPress={() => props.navigation.navigate('Home')}
+              onPress={() => props.navigation.navigate('BottomTabNavigation')}
               style={{fontWeight: 'bold', color: '#FFFFFF', padding: 10}}>
               Login
             </Text>

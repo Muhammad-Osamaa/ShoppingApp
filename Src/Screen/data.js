@@ -32,10 +32,10 @@ let card4 = {
   currency: 'NGN',
 };
 
-let card5 = {
-  id: '5',
-  imagePath: require('../Image/bigSale.png'),
-};
+// let card5 = {
+//   id: '5',
+//   imagePath: require('../Image/bigSale.png'),
+// };
 
 let card6 = {
   id: '6',
@@ -120,7 +120,7 @@ data.push(card1);
 data.push(card2);
 data.push(card3);
 data.push(card4);
-data.push(card5);
+// data.push(card5);
 data.push(card6);
 data.push(card7);
 data.push(card8);

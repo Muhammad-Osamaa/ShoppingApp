@@ -4,22 +4,34 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  Alert,
   TouchableOpacity,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
+import { useNavigation } from '@react-navigation/native';
+import Dashboard from './Dashboard';
 const initialState = {
   first: false,
   second: false,
 };
-// import axios from 'axios';
 
-// axios.get('https://reqres.in/api/users?page=2').then((response) => {
-//   console.log(response.data);
-// });
-
-export default function () {
+export default function Shipping() {
   const [state, setState] = useState(initialState);
-  const [toggleButton, setToggleButton] = React.useState(false);
+ const navigation = useNavigation();
+
+ const handleCheckOut =()=>{
+  Alert.alert('Order Placed',
+  'Your Order has been placed successfully.',
+  [
+    {
+      text:'Ok',
+      onPress:()=>{
+        navigation.navigate('Dashboard');
+      },
+    },
+  ]
+  );
+ };
   return (
     <View style={styles.container}>
       <View style={styles.mainView}>
@@ -27,11 +39,13 @@ export default function () {
       </View>
       <View style={styles.nameView}>
         <TextInput
+          key="firstNameInput"
           style={styles.nameTextView}
           placeholder="First Name"
           placeholderTextColor="#C4C4C4"
         />
         <TextInput
+          key="lastNameInput"
           style={[styles.nameTextView, {marginLeft: 25}]}
           placeholder="Last Name"
           placeholderTextColor="#C4C4C4"
@@ -88,9 +102,8 @@ export default function () {
           Express 2 to 3 days
         </Text>
       </View>
-      <TouchableOpacity style={styles.checkOutBtn}>
+      <TouchableOpacity style={styles.checkOutBtn} onPress={handleCheckOut}>
         <Text
-          //   onPress={() => props.navigation.navigate('Checkout')}
           style={{fontWeight: 'bold', color: '#FFFFFF', fontSize: 22}}>
           Check Out
         </Text>

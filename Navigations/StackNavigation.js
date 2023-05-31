@@ -10,6 +10,7 @@ import DrawerNavigation from './DrawerNavigation';
 import Homepage from '../Src/Screen/Dashboard';
 import CardView from '../Src/Screen/CardView';
 import Cart from '../Src/Screen/Cart';
+import Shipping from '../Src/Screen/Shipping';
 
 const Stack = createStackNavigator();
 export default function StackNavigation() {
@@ -21,7 +22,7 @@ export default function StackNavigation() {
       {/* <Stack.Screen name="Login" component={Login}></Stack.Screen> */}
       <Stack.Screen name="Dashboard" component={Homepage} />
       <Stack.Screen name="Carts" component={Cart} />
-
+      <Stack.Screen name='Shipping' component={Shipping}/>
       <Stack.Screen
         name="CardView"
         component={CardView}
