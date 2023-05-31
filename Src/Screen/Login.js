@@ -6,12 +6,20 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const handleLogin =()=>{
+    if(email ==='osama@gmail.com' && password==='12345'){
+      props.navigation.navigate('Dashboard');
+    }else{
+        Alert.alert('Login Failed', 'Invalid email or password');
+    }
+  };
   return (
     <>
       <Image style={styles.image} source={require('../Image/bag.png')} />
@@ -33,7 +41,7 @@ export default function Login(props) {
               style={styles.TextInput}
               placeholder="Username"
               placeholderTextColor="#C4C4C4"
-              onChangeText={email => setEmail(email)}
+              onChangeText={(username) => setEmail(username)}
             />
           </View>
           <View style={styles.inputView}>
@@ -42,12 +50,11 @@ export default function Login(props) {
               placeholder="Password"
               placeholderTextColor="#C4C4C4"
               secureTextEntry={true}
-              onChangeText={password => setPassword(password)}
+              onChangeText={(password) => setPassword(password)}
             />
           </View>
-          <TouchableOpacity style={styles.loginBtn}>
+          <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
             <Text
-              onPress={() => props.navigation.navigate('BottomTabNavigation')}
               style={{fontWeight: 'bold', color: '#FFFFFF', padding: 10}}>
               Login
             </Text>

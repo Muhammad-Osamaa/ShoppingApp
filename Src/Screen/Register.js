@@ -64,7 +64,8 @@ export default function Register(props) {
           </View>
 
           <TouchableOpacity style={styles.registerBtn}>
-            <Text style={{color: '#FFFFFF', fontWeight: 'bold', padding: 10}}>
+            <Text onPress={() => props.navigation.navigate('Login')}
+                  style={{color: '#FFFFFF', fontWeight: 'bold', padding: 10}}>
               Register
             </Text>
           </TouchableOpacity>

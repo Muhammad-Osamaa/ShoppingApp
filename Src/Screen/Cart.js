@@ -11,11 +11,10 @@ import {
 } from 'react-native';
 import CartContext from '../Components/Context/CartContext';
 import {useNavigation} from '@react-navigation/native';
-import Shipping from './Shipping';
-import { color } from 'react-native-reanimated';
+
 
 export default function Cart() {
-  const {cartItems} = useContext(CartContext);
+  const {cartItems,removeItemFromCart} = useContext(CartContext);
   const navigation = useNavigation();
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -29,6 +28,9 @@ export default function Cart() {
       total += item.price;
     });
     setTotalPrice(total);
+  };
+  const handleRemoveItem = (itemId) => {
+    removeItemFromCart(itemId);
   };
 
   return (
@@ -46,15 +48,14 @@ export default function Cart() {
                   borderBottomWidth: 1,
                   borderColor: '#C4C4C4',
                 }}>
-                <Image source={item.imagePath} style={{flex: 5, margin: 5}} />
-                <View style={{flex: 3, marginLeft: 10}}>
-                  <View style={{flex: 1, marginBottom: -10}}>
+                <Image source={item.imagePath} style={{flex: 5,marginRight:10}} />
+                <View style={{flex: 3}}>
+                  <View style={{flex: 1}}>
                     <Text
                       style={{
                         fontSize: 16,
                         fontWeight: 'bold',
                         color: '#6E7179',
-                        alignItems: 'center',
                         paddingTop: 15,
                         lineHeight: 20,
                       }}>
@@ -87,7 +88,7 @@ export default function Cart() {
                   </View>
                   <View
                     style={{
-                      flex: 4,
+                      flex: 1,
                       flexDirection: 'row',
                       alignItems: 'center',
                     }}>
@@ -100,10 +101,7 @@ export default function Cart() {
                         backgroundColor: '#989494',
                         color: '#FFFFFF',
                         borderRadius: 5,
-                        borderBottomLeftRadius: 5,
-                        borderBottomRightRadius: 5,
-                        borderTopRightRadius: 5,
-                        borderTopLeftRadius: 5,
+                        marginRight:10,
                       }}>
                       {item?.size}
                     </Text>
@@ -116,16 +114,26 @@ export default function Cart() {
                         backgroundColor: '#989494',
                         color: '#FFFFFF',
                         borderRadius: 5,
-                        marginLeft: 30,
-                        borderBottomLeftRadius: 5,
-                        borderBottomRightRadius: 5,
-                        borderTopRightRadius: 5,
-                        borderTopLeftRadius: 5,
                       }}>
                       {item?.total}
                     </Text>
                   </View>
                 </View>
+                <TouchableOpacity
+                  style={{
+                  backgroundColor: '#989494',
+                  borderRadius: 25,
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 30,
+                  height: 30,
+                  }}
+                  onPress={() => handleRemoveItem(item.id)}
+                >
+                  <Text style={{ color: 'white',fontSize:18,textAlign:'left', fontWeight: 'bold'}}>
+                    x
+                  </Text>
+                </TouchableOpacity>
               </View>
         
           ))
@@ -139,10 +147,7 @@ export default function Cart() {
             style={{
               backgroundColor:'#F4F4F4',
               borderWidth: 1,
-              borderBottomLeftRadius:25,
-              borderBottomRightRadius:25,
-              borderTopLeftRadius:25,
-              borderTopRightRadius:25,
+              borderRadius:25,
               borderColor: '#C4C4C4',
               paddingLeft: 20,
               fontSize: 20,

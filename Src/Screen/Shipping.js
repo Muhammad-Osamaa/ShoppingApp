@@ -8,30 +8,43 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
-import { useNavigation } from '@react-navigation/native';
-import Dashboard from './Dashboard';
-const initialState = {
-  first: false,
-  second: false,
-};
+import {useNavigation} from '@react-navigation/native';
+
 
 export default function Shipping() {
-  const [state, setState] = useState(initialState);
- const navigation = useNavigation();
+  const [state, setState] = useState({
+    first: false,
+    second: false,
+  });
+  const navigation = useNavigation();
 
- const handleCheckOut =()=>{
-  Alert.alert('Order Placed',
-  'Your Order has been placed successfully.',
-  [
-    {
-      text:'Ok',
-      onPress:()=>{
-        navigation.navigate('Dashboard');
+  const handleCheckOut = () => {
+    Alert.alert(
+     'Order Placed',
+     'Your Order has been placed successfully.',
+      [
+      {
+        text: 'Ok',
+        onPress: () => {
+          navigation.navigate('Dashboard');
+        },
       },
-    },
-  ]
-  );
- };
+    ]
+    );
+  };
+  const handleFirstCheckboxChange = (value) => {
+    setState({
+      first: value,
+      second: !value,
+    });
+  };
+
+  const handleSecondCheckboxChange = (value) => {
+    setState({
+      first: !value,
+      second: value,
+    });
+  };
   return (
     <View style={styles.container}>
       <View style={styles.mainView}>
@@ -77,12 +90,7 @@ export default function Shipping() {
       <View style={styles.checkboxWrapper}>
         <CheckBox
           value={state.first}
-          onValueChange={value =>
-            setState({
-              ...state,
-              first: value,
-            })
-          }
+          onValueChange={handleFirstCheckboxChange}
         />
         <Text style={{fontWeight: 'bold', color: '#4C5059'}}>
           Standard 5 to 7 days
@@ -91,20 +99,14 @@ export default function Shipping() {
       <View style={styles.checkboxWrapper}>
         <CheckBox
           value={state.second}
-          onValueChange={value =>
-            setState({
-              ...state,
-              second: value,
-            })
-          }
+          onValueChange={handleSecondCheckboxChange}
         />
         <Text style={{fontWeight: 'bold', color: '#4C5059'}}>
           Express 2 to 3 days
         </Text>
       </View>
       <TouchableOpacity style={styles.checkOutBtn} onPress={handleCheckOut}>
-        <Text
-          style={{fontWeight: 'bold', color: '#FFFFFF', fontSize: 22}}>
+        <Text style={{fontWeight: 'bold', color: '#FFFFFF', fontSize: 22}}>
           Check Out
         </Text>
       </TouchableOpacity>
