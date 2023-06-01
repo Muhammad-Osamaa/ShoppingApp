@@ -8,9 +8,7 @@ export default function App() {
   return (
     <>
       <CartProvider>
-        <NavigationContainer>
           <StackNavigation />
-        </NavigationContainer>
       </CartProvider>
     </>
   );

@@ -6,37 +6,19 @@ import {
   StyleSheet,
   TouchableOpacity,
   Animated,
+  ToastAndroid,
 } from 'react-native';
-import Cart from './Cart';
-import data from './data';
 import CartContext from '../Components/Context/CartContext';
-// import { getData } from './data';
 
 const animationTime = 500;
 
 export default function CardView({route, navigation}) {
-  // Accessing the item from the route.params object
   const item = route.params.item;
-  // const {addToCart} = useContext(CartContext);
-
-  // const handleAddToCart = ()=>{
-  //   addToCart(navigation.navigate(Cart));
-  // };
-  // const [data,setData] = useState({});
-  // const {addItemToCart} = useContext(CartContext);
-
-  // useEffect(()=>{
-  //   setData(getData(itemId));
-  // }, []);
-
-  // function onAddToCart(){
-  //   addItemToCart;
-  // }
-
-  const {addToCart} = useContext(CartContext);
-  let [counter, setCounter] = React.useState(1);
+  const {cartItems, addToCart} = useContext(CartContext);
+  let [counter, setCounter] = useState(1);
   const totalPrice = item.price * counter;
   const animatedValue = React.useRef(new Animated.Value(0)).current;
+
   const startAnimation = value => {
     return Animated.spring(animatedValue, {
       toValue: value,
@@ -66,9 +48,42 @@ export default function CardView({route, navigation}) {
     outputRange: [0.5, 1, 1.2],
     extrapolate: 'clamp',
   });
-  const [selectedSize,setSelectedSize]= useState('');
-  const handleSizeSelection =(size)=>{
+  const [selectedSize, setSelectedSize] = useState('');
+  const handleSizeSelection = size => {
     setSelectedSize(size);
+  };
+  // const handleAddToCart=()=>{=============== correct code =====================
+  //     if(!selectedSize){
+  //       ToastAndroid.show('Please Select a size', ToastAndroid.SHORT);
+  //     }else{
+  //       addToCart({...item,total:counter, price: totalPrice,size:selectedSize});
+  //       // navigation.goBack();
+  //       navigation.navigate('Cart');
+  //       }
+  //     };
+  const handleAddToCart = () => {
+    if (!selectedSize) {
+      ToastAndroid.show('Please Select a size', ToastAndroid.SHORT);
+    } else {
+      const cartItem = {
+        ...item,
+        total: counter,
+        price: totalPrice,
+        size: selectedSize,
+      };
+      const isSizeAlreadyAdded = cartItems.some(
+        item => item.size === selectedSize,
+      );
+      if (isSizeAlreadyAdded) {
+        ToastAndroid.show(
+          'This size is already in the Cart',
+          ToastAndroid.SHORT,
+        );
+      } else {
+        addToCart(cartItem);
+        navigation.navigate('Cart');
+      }
+    }
   };
 
   return (
@@ -118,9 +133,21 @@ export default function CardView({route, navigation}) {
           </View>
         </View>
         <View flexDirection="row" style={{marginRight: 180, marginTop: 30}}>
-          <SBtn title={'M'} size={selectedSize} onPress={()=> handleSizeSelection('M')} />
-          <SBtn title={'L'} size={selectedSize} onPress={()=> handleSizeSelection('L')} />
-          <SBtn title={'XL'} size={selectedSize} onPress={()=> handleSizeSelection('XL')}/>
+          <SBtn
+            title={'M'}
+            size={selectedSize}
+            onPress={() => handleSizeSelection('M')}
+          />
+          <SBtn
+            title={'L'}
+            size={selectedSize}
+            onPress={() => handleSizeSelection('L')}
+          />
+          <SBtn
+            title={'XL'}
+            size={selectedSize}
+            onPress={() => handleSizeSelection('XL')}
+          />
         </View>
         <View
           style={{
@@ -141,13 +168,7 @@ export default function CardView({route, navigation}) {
             </Text>
           </View>
           <View style={{flex: 9, marginLeft: 20}}>
-            <Btn2
-              title={'Add to Cart'}
-              onPress={() => {
-                addToCart({...item,total:counter,price:totalPrice,size:selectedSize });
-                navigation.navigate('Carts');
-              }}
-            />
+            <Btn2 title={'Add to Cart'} onPress={handleAddToCart} />
           </View>
         </View>
       </View>
@@ -215,24 +236,23 @@ const Btn = ({title, onPress}) => {
     </TouchableOpacity>
   );
 };
-const SBtn = ({title,size,onPress}) => {
-  
-  
+const SBtn = ({title, size, onPress}) => {
   return (
     <TouchableOpacity
       style={{
         width: 35,
         height: 40,
-        backgroundColor: size === title ? '#989494':'#EAEAEA',
+        backgroundColor: size === title ? '#989494' : '#EAEAEA',
         borderRadius: 8,
         justifyContent: 'center',
         alignItems: 'center',
         margin: 8,
-      }} onPress={onPress}>
+      }}
+      onPress={onPress}>
       <Text
         style={{
           fontSize: 15,
-          color: size === title?'#FFFFFF':'#6E7179',
+          color: size === title ? '#FFFFFF' : '#6E7179',
           fontWeight: '600',
           textAlign: 'left',
         }}>

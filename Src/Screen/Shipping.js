@@ -6,44 +6,53 @@ import {
   TextInput,
   Alert,
   TouchableOpacity,
+  ToastAndroid,
 } from 'react-native';
 import CheckBox from '@react-native-community/checkbox';
 import {useNavigation} from '@react-navigation/native';
-
 
 export default function Shipping() {
   const [state, setState] = useState({
     first: false,
     second: false,
   });
+
+  const [inputValues, setInputValues] = useState({
+    firstName: '',
+    lastName: '',
+    address: '',
+    town: '',
+    zipCode: '',
+  });
+
+  const [showToast, setShowToast] = useState(false);
   const navigation = useNavigation();
 
   const handleCheckOut = () => {
-    Alert.alert(
-     'Order Placed',
-     'Your Order has been placed successfully.',
-      [
-      {
-        text: 'Ok',
-        onPress: () => {
-          navigation.navigate('Dashboard');
+    if (
+      inputValues.firstName === '' ||
+      inputValues.lastName === '' ||
+      inputValues.address === '' ||
+      inputValues.town === '' ||
+      inputValues.zipCode === ''
+    ) {
+      ToastAndroid.show('Please fill all fields', ToastAndroid.SHORT);
+    } else {
+      Alert.alert('Order Placed', 'Your Order has been placed successfully.', [
+        {
+          text: 'Ok',
+          onPress: () => {
+            navigation.navigate('Dashboard');
+          },
         },
-      },
-    ]
-    );
+      ]);
+    }
   };
-  const handleFirstCheckboxChange = (value) => {
-    setState({
-      first: value,
-      second: !value,
-    });
-  };
-
-  const handleSecondCheckboxChange = (value) => {
-    setState({
-      first: !value,
-      second: value,
-    });
+  const handleInputChange = (field, value) => {
+    setInputValues(prevValues => ({
+      ...prevValues,
+      [field]: value,
+    }));
   };
   return (
     <View style={styles.container}>
@@ -56,12 +65,16 @@ export default function Shipping() {
           style={styles.nameTextView}
           placeholder="First Name"
           placeholderTextColor="#C4C4C4"
+          value={inputValues.firstName}
+          onChangeText={text => handleInputChange('firstName', text)}
         />
         <TextInput
           key="lastNameInput"
           style={[styles.nameTextView, {marginLeft: 25}]}
           placeholder="Last Name"
           placeholderTextColor="#C4C4C4"
+          value={inputValues.lastName}
+          onChangeText={text => handleInputChange('lastName', text)}
         />
       </View>
       <View style={{width: '100%', alignItems: 'center'}}>
@@ -69,6 +82,8 @@ export default function Shipping() {
           style={styles.addressText}
           placeholder="Address"
           placeholderTextColor="#C4C4C4"
+          value={inputValues.address}
+          onChangeText={text => handleInputChange('address', text)}
         />
       </View>
       <View style={styles.nameView}>
@@ -76,11 +91,15 @@ export default function Shipping() {
           style={styles.nameTextView}
           placeholder="Town/City"
           placeholderTextColor="#C4C4C4"
+          value={inputValues.town}
+          onChangeText={text => handleInputChange('town', text)}
         />
         <TextInput
           style={[styles.nameTextView, {marginLeft: 25}]}
           placeholder="Zip Code"
           placeholderTextColor="#C4C4C4"
+          value={inputValues.zipCode}
+          onChangeText={text => handleInputChange('zipCode', text)}
         />
       </View>
       <View style={styles.borderLine} />
@@ -90,7 +109,12 @@ export default function Shipping() {
       <View style={styles.checkboxWrapper}>
         <CheckBox
           value={state.first}
-          onValueChange={handleFirstCheckboxChange}
+          onValueChange={value =>
+            setState({
+              first: value,
+              second: !value,
+            })
+          }
         />
         <Text style={{fontWeight: 'bold', color: '#4C5059'}}>
           Standard 5 to 7 days
@@ -99,7 +123,12 @@ export default function Shipping() {
       <View style={styles.checkboxWrapper}>
         <CheckBox
           value={state.second}
-          onValueChange={handleSecondCheckboxChange}
+          onValueChange={value =>
+            setState({
+              first: !value,
+              second: value,
+            })
+          }
         />
         <Text style={{fontWeight: 'bold', color: '#4C5059'}}>
           Express 2 to 3 days

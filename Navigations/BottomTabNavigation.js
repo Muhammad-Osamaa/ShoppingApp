@@ -18,7 +18,7 @@ export default function BottomTabNavigation() {
         tabBarStyle: {backgroundColor: '#FFFFFF'},
       }}>
       <Tab.Screen
-        name="   "
+        name="Home"
         component={DrawerNavigation}
         options={{
           tabBarIcon: ({focused, size}) => (
@@ -31,7 +31,7 @@ export default function BottomTabNavigation() {
         }}
       />
       <Tab.Screen
-        name=" "
+        name="Cart"
         component={Cart}
         options={{
           tabBarIcon: ({focused, size}) => (
@@ -44,7 +44,7 @@ export default function BottomTabNavigation() {
         }}
       />
       <Tab.Screen
-        name="  "
+        name="User"
         component={User}
         options={{
           tabBarIcon: ({focused, size}) => (

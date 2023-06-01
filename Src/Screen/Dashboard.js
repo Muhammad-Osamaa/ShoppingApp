@@ -7,14 +7,7 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 
 export default function Homepage() {
-  // console.log('here i am---->', data);
   const renderItem = ({item, index}) => <Card key={item?.id} item={item} />;
-
-  // const [data,setData]= useState([]);
-
-  // useEffect(()=>{
-  //   setData(data);
-  // },[])
 
   return (
     <SafeAreaView style={styles.container}>
@@ -30,12 +23,6 @@ export default function Homepage() {
         renderItem={renderItem}
         keyExtractor={item => item?.id}
       />
-      {/* <View>
-      {data.map((data) => (
-         key= {id,name,price,currency,imagePath}
-      ))}
-      <Cart />
-    </View> */}
     </SafeAreaView>
   );
 }

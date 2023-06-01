@@ -8,13 +8,15 @@ import Homepage from '../Src/Screen/Dashboard';
 import CardView from '../Src/Screen/CardView';
 import Cart from '../Src/Screen/Cart';
 import Shipping from '../Src/Screen/Shipping';
+import { NavigationContainer } from '@react-navigation/native';
 
 const Stack = createStackNavigator();
 export default function StackNavigation() {
   return (
-    <Stack.Navigator screenOptions={{headerShown: false}}>
+    <NavigationContainer>
+    <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Resgister'>
       <Stack.Screen name="Register" component={Register}></Stack.Screen>
-      <Stack.Screen name="BottomTab" component={BottomTabNavigation} />
+      <Stack.Screen name="BottomTabNavigation" component={BottomTabNavigation} />
       <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
       <Stack.Screen name="Login" component={Login}></Stack.Screen>
       <Stack.Screen name="Dashboard" component={Homepage} />
@@ -26,5 +28,6 @@ export default function StackNavigation() {
         initialParams={{item: {}}}
       />
     </Stack.Navigator>
+    </NavigationContainer>
   );
 }

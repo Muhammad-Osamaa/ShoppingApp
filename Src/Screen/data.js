@@ -133,10 +133,4 @@ data.push(card14);
 data.push(card15);
 
 
-// export function getDatas(){
-//   return data;
-// }
-// export function getData(id){
-//   return data.find((data)=>(data.id == id));
-// }
 export default data;

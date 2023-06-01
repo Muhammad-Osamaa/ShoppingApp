@@ -8,13 +8,20 @@ const CartProvider = ({children}) => {
     setCartItems([...cartItems, item]);
   };
 
-  const removeItemFromCart = (itemId) => {
-    const updatedCartItems = cartItems.filter(item => item.id !== itemId);
+  const removeItemFromCart = (itemId, itemsize) => {
+    const updatedCartItems = cartItems.filter(
+      item => item.Id !== itemId && item.size !== itemsize,
+    );
     setCartItems(updatedCartItems);
+
+    // const removeItemFromCart = (item,index) => {
+
+    //   const updatedCartItems = cartItems.filter(item=> index!==index );
+    //   setCartItems(updatedCartItems);
   };
 
   return (
-    <CartContext.Provider value={{cartItems, addToCart,removeItemFromCart}}>
+    <CartContext.Provider value={{cartItems, addToCart, removeItemFromCart}}>
       {children}
     </CartContext.Provider>
   );
