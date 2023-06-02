@@ -42,7 +42,6 @@ export default function CardView({route, navigation}) {
       setTimeout(() => {}, animationTime);
     }
   };
-
   const scale = animatedValue.interpolate({
     inputRange: [-1, 0, 1],
     outputRange: [0.5, 1, 1.2],
@@ -61,78 +60,71 @@ export default function CardView({route, navigation}) {
   //       navigation.navigate('Cart');
   //       }
   //     };
+//===============================================================================================
+  // const handleAddToCart = () => {
+  //   if (!selectedSize) {
+  //     ToastAndroid.show('Please Select a size', ToastAndroid.SHORT);
+  //   } else {
+  //     const cartItem = {
+  //       ...item,
+  //       total: counter,
+  //       price: totalPrice,
+  //       size: selectedSize,
+  //     };
+  //     const isSizeAlreadyAdded = cartItems.some(item => item.size === selectedSize);
+  //     if (isSizeAlreadyAdded) {
+  //       ToastAndroid.show(
+  //         'This size is already in the Cart',
+  //         ToastAndroid.SHORT,
+  //       );
+  //     } else {
+  //       addToCart(cartItem);
+  //       navigation.navigate('Cart');
+  //     }
+  //   }
+  // };
   const handleAddToCart = () => {
     if (!selectedSize) {
       ToastAndroid.show('Please Select a size', ToastAndroid.SHORT);
     } else {
-      const cartItem = {
-        ...item,
-        total: counter,
-        price: totalPrice,
-        size: selectedSize,
-      };
-      const isSizeAlreadyAdded = cartItems.some(
-        item => item.size === selectedSize,
+      const isItemAlreadyInCart = cartItems.some(
+        (cartItem) => cartItem.id === item.id && cartItem.size === selectedSize
       );
-      if (isSizeAlreadyAdded) {
-        ToastAndroid.show(
-          'This size is already in the Cart',
-          ToastAndroid.SHORT,
-        );
+  
+      if (isItemAlreadyInCart) {
+        ToastAndroid.show('This item is already in the cart', ToastAndroid.SHORT);
       } else {
+        const cartItem = {
+          ...item,
+          total: counter,
+          price: totalPrice,
+          size: selectedSize,
+        };
         addToCart(cartItem);
         navigation.navigate('Cart');
       }
     }
   };
-
+ 
   return (
     <>
       <Image source={item.imagePath} style={styles.image} />
       <View style={styles.container}>
-        <View
-          style={{
-            flexDirection: 'row',
-            paddingTop: 25,
-            paddingLeft: 20,
-            paddingRight: 10,
-          }}>
+        <View style={styles.mainView}>
           <View style={{flex: 9, justifyContent: 'center'}}>
-            <Text
-              style={{
-                paddingBottom: 10,
-                fontSize: 25,
-                color: '#122311',
-                fontWeight: 'bold',
-              }}>
-              {item.name}
-            </Text>
-            <Text style={{color: '#4C5059', fontSize: 18}}>
+            <Text style={styles.nameText}>{item.name}</Text>
+            <Text style={styles.txxt}>
               Complete set of Agba, Buba, Trousers and Cap for Men. Suitable for
               Owambe Events. It can be worn without the Agbada.
             </Text>
           </View>
-          <View
-            style={{
-              flex: 3,
-              paddingLeft: 30,
-              alignItems: 'center',
-              justifyContent: 'center',
-            }}>
+          <View style={styles.BtnView}>
             <Btn title={'+'} onPress={increment} />
-            <Animated.Text
-              style={{
-                color: 'black',
-                fontSize: 20,
-                fontWeight: 'bold',
-                transform: [{scale}],
-              }}>
-              {counter}
-            </Animated.Text>
+            <Animated.Text style={[styles.AnimatedText,{transform:[{scale}]}]}>{counter}</Animated.Text>
             <Btn title={'-'} onPress={decrement} />
           </View>
         </View>
-        <View flexDirection="row" style={{marginRight: 180, marginTop: 30}}>
+        <View style={styles.SBtnView}>
           <SBtn
             title={'M'}
             size={selectedSize}
@@ -149,21 +141,9 @@ export default function CardView({route, navigation}) {
             onPress={() => handleSizeSelection('XL')}
           />
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center',
-            paddingLeft: 20,
-          }}>
+        <View style={styles.SecondView}>
           <View style={{flex: 6}}>
-            <Text
-              style={{
-                fontSize: 22,
-                fontWeight: 'bold',
-                color: '#000000',
-                textAlign: 'center',
-              }}>
+            <Text style={styles.lastText}>
               {counter > 0 ? item.price * counter : item.price} {item.currency}
             </Text>
           </View>
@@ -202,6 +182,50 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     alignItems: 'center',
+  },
+  mainView: {
+    flexDirection: 'row',
+    paddingTop: 25,
+    paddingLeft: 20,
+    paddingRight: 10,
+  },
+  nameText: {
+    paddingBottom: 10,
+    fontSize: 25,
+    color: '#122311',
+    fontWeight: 'bold',
+  },
+  txxt: {
+    color: '#4C5059',
+    fontSize: 18,
+  },
+  BtnView: {
+    flex: 3,
+    paddingLeft: 30,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  AnimatedText: {
+    color: 'black',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  SBtnView: {
+    flexDirection: 'row',
+    marginRight: 180,
+    marginTop: 30,
+  },
+  SecondView: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingLeft: 20,
+  },
+  lastText: {
+    fontSize: 22,
+    fontWeight: 'bold',
+    color: '#000000',
+    textAlign: 'center',
   },
   text: {
     fontSize: 20,

@@ -13,6 +13,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible,setPasswordVisible] = useState(false);
   const handleLogin = () => {
     if (email === 'osama@gmail.com' && password === '12345') {
       props.navigation.navigate('BottomTabNavigation');
@@ -20,19 +21,17 @@ export default function Login(props) {
       Alert.alert('Login Failed', 'Invalid email or password');
     }
   };
+  const togglePasswordVisiblity = ()=>{
+    setPasswordVisible(!passwordVisible);
+  };
   return (
     <>
       <Image style={styles.image} source={require('../Image/bag.png')} />
       <View style={styles.container}>
-        <KeyboardAwareScrollView style={{flex: 1, marginLeft: 5}}>
+        <KeyboardAwareScrollView style={styles.keyboardAwareScrollView}>
           <View
-            style={{
-              marginBottom: 30,
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-              marginRight: 200,
-            }}>
-            <Text style={{fontSize: 30, fontWeight: 'bold', color: '#989494'}}>
+            style={styles.mainView}>
+            <Text style={styles.mainViewText}>
               Log In
             </Text>
           </View>
@@ -49,33 +48,35 @@ export default function Login(props) {
               style={styles.TextInput}
               placeholder="Password"
               placeholderTextColor="#C4C4C4"
-              secureTextEntry={true}
+              secureTextEntry={!passwordVisible}
               onChangeText={password => setPassword(password)}
             />
+            <TouchableOpacity 
+            style={styles.eyeIcon} 
+            onPress={togglePasswordVisiblity}>
+               <Image
+                source={
+                  passwordVisible
+                    ? require('../Image/eyeOpen.png')
+                    : require('../Image/eyeClosed.png')
+                }
+                style={styles.eyeIconImage}
+              />
+            </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
-            <Text style={{fontWeight: 'bold', color: '#FFFFFF', padding: 10}}>
+            <Text style={styles.touchableOpacityText}>
               Login
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
             <Text
-              style={{
-                alignItems: 'center',
-                fontWeight: 'bold',
-                color: '#000000',
-                marginLeft: 70,
-                marginTop: 20,
-              }}>
+              style={styles.secondTouchableOpacity}>
               Don't I have an account?
             </Text>
             <Text
               onPress={() => props.navigation.navigate('Register')}
-              style={{
-                color: '#000000',
-                fontWeight: 'bold',
-                textAlign: 'center',
-              }}>
+              style={styles.onPressText}>
               Register
             </Text>
           </TouchableOpacity>
@@ -85,6 +86,10 @@ export default function Login(props) {
   );
 }
 const styles = StyleSheet.create({
+  keyboardAwareScrollView:{
+    flex: 1, 
+    marginLeft: 5,
+  },
   image: {
     marginTop: 60,
     alignItems: 'center',
@@ -103,6 +108,17 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },
+  mainView:{
+    marginBottom: 30,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginRight: 200,
+  },
+  mainViewText:{
+    fontSize: 30,
+    fontWeight: 'bold',
+    color: '#989494'
+  },
   inputView: {
     backgroundColor: '#FFFFFF',
     borderRadius: 10,
@@ -117,6 +133,37 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginLeft: 20,
+  },
+  eyeIcon:{
+    position:'absolute',
+    top:13,
+    right:15,
+    height:24,
+    width:24,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  eyeIconImage:{
+    height:28,
+    width:36,
+    backgroundColor: '#FFFFFF'
+  },
+  touchableOpacityText:{
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    padding: 10
+  },
+  secondTouchableOpacity:{
+    alignItems: 'center',
+    fontWeight: 'bold',
+    color: '#000000',
+    marginLeft: 70,
+    marginTop: 20,
+  },
+  onPressText:{
+    color: '#000000',
+    fontWeight: 'bold',
+    textAlign: 'center',
   },
   loginBtn: {
     width: '100%',

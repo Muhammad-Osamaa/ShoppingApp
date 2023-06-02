@@ -8,9 +8,9 @@ const CartProvider = ({children}) => {
     setCartItems([...cartItems, item]);
   };
 
-  const removeItemFromCart = (itemId, itemsize) => {
+  const removeItemFromCart = (itemId, itemSize) => {
     const updatedCartItems = cartItems.filter(
-      item => item.Id !== itemId && item.size !== itemsize,
+      (item) => item.id !== itemId || item.size !== itemSize
     );
     setCartItems(updatedCartItems);
 

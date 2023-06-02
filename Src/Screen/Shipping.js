@@ -42,7 +42,7 @@ export default function Shipping() {
         {
           text: 'Ok',
           onPress: () => {
-            navigation.navigate('Dashboard');
+            navigation.navigate('BottomTabNavigation');
           },
         },
       ]);
@@ -116,7 +116,7 @@ export default function Shipping() {
             })
           }
         />
-        <Text style={{fontWeight: 'bold', color: '#4C5059'}}>
+        <Text style={styles.checkBoxText}>
           Standard 5 to 7 days
         </Text>
       </View>
@@ -130,12 +130,12 @@ export default function Shipping() {
             })
           }
         />
-        <Text style={{fontWeight: 'bold', color: '#4C5059'}}>
+        <Text style={styles.checkBoxText}>
           Express 2 to 3 days
         </Text>
       </View>
       <TouchableOpacity style={styles.checkOutBtn} onPress={handleCheckOut}>
-        <Text style={{fontWeight: 'bold', color: '#FFFFFF', fontSize: 22}}>
+        <Text style={styles.checkOutText}>
           Check Out
         </Text>
       </TouchableOpacity>
@@ -225,5 +225,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#989494',
     marginLeft: 20,
     marginBottom: 10,
+  },
+  checkBoxText:{
+    fontWeight: 'bold',
+    color: '#4C5059'
+  },
+  checkOutText:{
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    fontSize: 22
   },
 });

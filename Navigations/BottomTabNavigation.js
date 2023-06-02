@@ -12,10 +12,10 @@ const Tab = createBottomTabNavigator();
 export default function BottomTabNavigation() {
   return (
     <Tab.Navigator
+      initialRouteName="Home"
       screenOptions={{
-        initialRouteName: 'Homepage',
-        headerShown: false,
         tabBarStyle: {backgroundColor: '#FFFFFF'},
+        headerShown:false,
       }}>
       <Tab.Screen
         name="Home"
@@ -24,10 +24,13 @@ export default function BottomTabNavigation() {
           tabBarIcon: ({focused, size}) => (
             <FontAwesome5
               name="home"
-              color={focused ? '#6C6B6B' : '#6C6B6B'}
+              color={focused ? '#6C6B6B' : '#C4C4C4'}
               size={size}
             />
           ),
+          tabBarLabelStyle:{
+            color:'#6C6B6B'
+        },
         }}
       />
       <Tab.Screen
@@ -37,10 +40,13 @@ export default function BottomTabNavigation() {
           tabBarIcon: ({focused, size}) => (
             <FontAwesome5
               name="shopping-cart"
-              color={focused ? '#6C6B6B' : '#6C6B6B'}
+              color={focused ? '#6C6B6B' : '#C4C4C4'}
               size={size}
             />
           ),
+          tabBarLabelStyle:{
+              color:'#6C6B6B'
+          },
         }}
       />
       <Tab.Screen
@@ -50,10 +56,13 @@ export default function BottomTabNavigation() {
           tabBarIcon: ({focused, size}) => (
             <Entypo
               name="user"
-              color={focused ? '#6C6B6B' : '#6C6B6B'}
+              color={focused ? '#6C6B6B' : '#C4C4C4'}
               size={size}
             />
           ),
+          tabBarLabelStyle:{
+            color:'#6C6B6B'
+        },
         }}
       />
     </Tab.Navigator>

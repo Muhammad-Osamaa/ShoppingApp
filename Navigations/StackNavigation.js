@@ -13,12 +13,12 @@ import { NavigationContainer } from '@react-navigation/native';
 const Stack = createStackNavigator();
 export default function StackNavigation() {
   return (
-    <NavigationContainer>
-    <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Resgister'>
+  <NavigationContainer>
+    <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName='Login'>
+      <Stack.Screen name="Login" component={Login}></Stack.Screen>
       <Stack.Screen name="Register" component={Register}></Stack.Screen>
       <Stack.Screen name="BottomTabNavigation" component={BottomTabNavigation} />
       <Stack.Screen name="DrawerNavigation" component={DrawerNavigation} />
-      <Stack.Screen name="Login" component={Login}></Stack.Screen>
       <Stack.Screen name="Dashboard" component={Homepage} />
       <Stack.Screen name="Carts" component={Cart} />
       <Stack.Screen name="Shipping" component={Shipping} />

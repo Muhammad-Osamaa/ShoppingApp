@@ -12,29 +12,19 @@ export default function Register(props) {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [passwordVisible,setPasswordVisible]= useState(false);
+
+  const togglePasswordVisiblity =()=>{
+    setPasswordVisible(!passwordVisible);
+  };
   return (
     <>
       <Image style={styles.image} source={require('../Image/bag.png')} />
 
       <View style={styles.container}>
-        <KeyboardAwareScrollView style={{flex: 1, marginLeft: 5}}>
-          <View
-            style={{
-              marginBottom: 30,
-              alignItems: 'flex-start',
-              justifyContent: 'flex-start',
-              marginRight: 170,
-            }}>
-            <Text
-              style={{
-                justifyContent: 'center',
-                fontSize: 30,
-                color: '#989494',
-                fontWeight: 'bold',
-                marginBottom: 10,
-              }}>
-              Register
-            </Text>
+        <KeyboardAwareScrollView style={styles.keyboardAwareScrollView}>
+          <View style={styles.mainView}>
+            <Text style={styles.registerText}>Register</Text>
           </View>
 
           <View style={styles.inputView}>
@@ -59,34 +49,37 @@ export default function Register(props) {
               style={styles.TextInput}
               placeholder="Password"
               placeholderTextColor="#C4C4C4"
+              secureTextEntry={!passwordVisible}
               onChangeText={password => setPassword(password)}
             />
+            <TouchableOpacity 
+            style={styles.eyeIcon}
+            onPress={togglePasswordVisiblity}>
+              <Image
+                source={
+                  passwordVisible
+                  ? require('../Image/eyeOpen.png')
+                  : require('../Image/eyeClosed.png')
+                }
+                style={styles.eyeIconImage}
+              />
+            </TouchableOpacity>
           </View>
 
           <TouchableOpacity style={styles.registerBtn}>
-            <Text onPress={() => props.navigation.navigate('Login')}
-                  style={{color: '#FFFFFF', fontWeight: 'bold', padding: 10}}>
+            <Text
+              onPress={() => props.navigation.navigate('Login')}
+              style={styles.onPressText}>
               Register
             </Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text
-              style={{
-                alignItems: 'center',
-                fontWeight: 'bold',
-                color: '#000000',
-                marginTop: 20,
-                marginLeft: 60,
-              }}>
+            <Text style={styles.touchableOpacityText}>
               Already have an account?
             </Text>
             <Text
               onPress={() => props.navigation.navigate('Login')}
-              style={{
-                fontWeight: 'bold',
-                color: '#000000',
-                textAlign: 'center',
-              }}>
+              style={styles.loginText}>
               Login
             </Text>
           </TouchableOpacity>
@@ -97,6 +90,35 @@ export default function Register(props) {
 }
 
 const styles = StyleSheet.create({
+  keyboardAwareScrollView: {
+    flex: 1,
+    marginLeft: 5,
+  },
+  mainView: {
+    marginBottom: 30,
+    alignItems: 'flex-start',
+    justifyContent: 'flex-start',
+    marginRight: 170,
+  },
+  registerText: {
+    justifyContent: 'center',
+    fontSize: 30,
+    color: '#989494',
+    fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  onPressText: {
+    color: '#FFFFFF',
+    fontWeight: 'bold',
+    padding: 10,
+  },
+  touchableOpacityText: {
+    alignItems: 'center',
+    fontWeight: 'bold',
+    color: '#000000',
+    marginTop: 20,
+    marginLeft: 60,
+  },
   container: {
     flex: 1,
     backgroundColor: '#F4F4F4',
@@ -115,6 +137,11 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 125,
   },
+  loginText:{
+    fontWeight: 'bold',
+    color: '#000000',
+    textAlign: 'center',
+  },
 
   inputView: {
     backgroundColor: '#FFFFFF',
@@ -132,6 +159,20 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 10,
     marginLeft: 20,
+  },
+  eyeIcon:{
+    position:'absolute',
+    top:13,
+    right:15,
+    height:24,
+    width:24,
+    alignItems:'center',
+    justifyContent:'center',
+  },
+  eyeIconImage:{
+    height:28,
+    width:36,
+    backgroundColor: '#FFFFFF'
   },
   registerBtn: {
     width: '100%',

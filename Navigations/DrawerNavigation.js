@@ -14,11 +14,20 @@ export default function DrawerNavigation() {
     <>
       <Drawer.Navigator
         useLegacyImplementation={true}
-        initialRouteName="Homepage"
+        initialRouteName="Home"
         screenOptions={{
           drawerStyle: {
             backgroundColor: '#C4C4C4',
           },
+          drawerActiveTintColor: '#F4F4F4',
+        drawerInactiveTintColor: '#000000',
+        drawerLabelStyle: {
+          fontSize: 16,
+          fontWeight: 'bold',
+        },
+        drawerIconStyle: {
+          marginRight: -5,
+        },
         }}>
         <Drawer.Screen
           name="Home"
@@ -29,8 +38,8 @@ export default function DrawerNavigation() {
               <FontAwesome5Icon
                 name="Home"
                 size={size}
-                color={focused ? '#F4F4F4' : '#F4F4F4'}
-              />;
+                color={focused ? '#F4F4F4' : '#000000'}
+              />
             },
           }}
         />
@@ -43,7 +52,7 @@ export default function DrawerNavigation() {
               <MaterialCommunityIcons
                 name="face-man-profile"
                 size={size}
-                color={focused ? '#C4C4C4' : '#000000'}
+                color={focused ? '#F4F4F4' : '#000000'}
               />;
             },
           }}
@@ -57,8 +66,8 @@ export default function DrawerNavigation() {
               <AntDesign
                 name="setting"
                 size={size}
-                color={focused ? '#C4C4C4' : '#000000'}
-              />;
+                color={focused ? '#F4F4F4' : '#000000'}
+              />
             },
           }}
         />
