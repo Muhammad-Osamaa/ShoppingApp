@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,6 +16,8 @@ export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [passwordVisible, setPasswordVisible] = useState(false);
+  const emailInputRef = useRef(null);
+  const passwordInputRef = useRef(null);
 
   // useEffect(()=>{
 
@@ -49,6 +51,11 @@ export default function Login(props) {
         },
       );
       if (response.data.StatusCode === 200) {
+        setEmail('');
+        setPassword('');
+        setPasswordVisible(false);
+        emailInputRef.current.clear();
+        passwordInputRef.current.clear();
         props.navigation.navigate('BottomTabNavigation');
       } else {
         alert('Email or Password is incorrect');
@@ -73,6 +80,7 @@ export default function Login(props) {
           </View>
           <View style={styles.inputView}>
             <TextInput
+              ref={emailInputRef}
               style={styles.TextInput}
               placeholder="Username"
               placeholderTextColor="#C4C4C4"
@@ -81,6 +89,7 @@ export default function Login(props) {
           </View>
           <View style={styles.inputView}>
             <TextInput
+              ref={passwordInputRef}
               style={styles.TextInput}
               placeholder="Password"
               placeholderTextColor="#C4C4C4"

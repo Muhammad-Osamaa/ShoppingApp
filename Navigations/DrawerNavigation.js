@@ -14,7 +14,11 @@ const Drawer = createDrawerNavigator();
 const CustomDrawerContent = (props)=>{
   const navigation = useNavigation();
   const handleLogout = () =>{
-    navigation.navigate('Login');
+    navigation.navigate('Login',{
+      email:'',
+      password:'',
+      paswordVisible:false,
+    });
   };
   return(
     <View style={styles.container}>
@@ -43,7 +47,7 @@ const styles= StyleSheet.create({
     flex:1,
   },
   logoutButton:{
-    width: '80%',
+    width: '70%',
     borderRadius: 20,
     height: 50,
     borderColor:'#000000',
@@ -51,6 +55,7 @@ const styles= StyleSheet.create({
     justifyContent: 'center',
     backgroundColor: '#989494',
     fontWeight: 'bold',
+    marginLeft:25,
     marginBottom: 20,
   },
   logoutButtonText:{
