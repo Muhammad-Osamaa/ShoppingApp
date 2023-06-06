@@ -172,6 +172,7 @@ const styles = StyleSheet.create({
   eyeIconImage:{
     height:28,
     width:36,
+    padding:-15,
     backgroundColor: '#FFFFFF'
   },
   registerBtn: {

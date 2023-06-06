@@ -60,7 +60,7 @@ export default function CardView({route, navigation}) {
   //       navigation.navigate('Cart');
   //       }
   //     };
-//===============================================================================================
+  //===============================================================================================
   // const handleAddToCart = () => {
   //   if (!selectedSize) {
   //     ToastAndroid.show('Please Select a size', ToastAndroid.SHORT);
@@ -88,11 +88,14 @@ export default function CardView({route, navigation}) {
       ToastAndroid.show('Please Select a size', ToastAndroid.SHORT);
     } else {
       const isItemAlreadyInCart = cartItems.some(
-        (cartItem) => cartItem.id === item.id && cartItem.size === selectedSize
+        cartItem => cartItem.id === item.id && cartItem.size === selectedSize,
       );
-  
+
       if (isItemAlreadyInCart) {
-        ToastAndroid.show('This item is already in the cart', ToastAndroid.SHORT);
+        ToastAndroid.show(
+          'This item is already in the cart',
+          ToastAndroid.SHORT,
+        );
       } else {
         const cartItem = {
           ...item,
@@ -105,7 +108,7 @@ export default function CardView({route, navigation}) {
       }
     }
   };
- 
+
   return (
     <>
       <Image source={item.imagePath} style={styles.image} />
@@ -120,7 +123,10 @@ export default function CardView({route, navigation}) {
           </View>
           <View style={styles.BtnView}>
             <Btn title={'+'} onPress={increment} />
-            <Animated.Text style={[styles.AnimatedText,{transform:[{scale}]}]}>{counter}</Animated.Text>
+            <Animated.Text
+              style={[styles.AnimatedText, {transform: [{scale}]}]}>
+              {counter}
+            </Animated.Text>
             <Btn title={'-'} onPress={decrement} />
           </View>
         </View>

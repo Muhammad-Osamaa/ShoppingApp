@@ -116,9 +116,7 @@ export default function Shipping() {
             })
           }
         />
-        <Text style={styles.checkBoxText}>
-          Standard 5 to 7 days
-        </Text>
+        <Text style={styles.checkBoxText}>Standard 5 to 7 days</Text>
       </View>
       <View style={styles.checkboxWrapper}>
         <CheckBox
@@ -130,14 +128,10 @@ export default function Shipping() {
             })
           }
         />
-        <Text style={styles.checkBoxText}>
-          Express 2 to 3 days
-        </Text>
+        <Text style={styles.checkBoxText}>Express 2 to 3 days</Text>
       </View>
       <TouchableOpacity style={styles.checkOutBtn} onPress={handleCheckOut}>
-        <Text style={styles.checkOutText}>
-          Check Out
-        </Text>
+        <Text style={styles.checkOutText}>Check Out</Text>
       </TouchableOpacity>
     </View>
   );
@@ -226,13 +220,13 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     marginBottom: 10,
   },
-  checkBoxText:{
+  checkBoxText: {
     fontWeight: 'bold',
-    color: '#4C5059'
+    color: '#4C5059',
   },
-  checkOutText:{
+  checkOutText: {
     fontWeight: 'bold',
     color: '#FFFFFF',
-    fontSize: 22
+    fontSize: 22,
   },
 });

@@ -30,55 +30,30 @@ export default function Cart() {
       <ScrollView style={{flex: 1}}>
         {cartItems.length > 0 ? (
           cartItems.map((item, index) => (
-            <View
-              key={`${item?.id}-${index}`}
-              style={styles.container}>
-              <Image
-                source={item.imagePath}
-                style={styles.image}/>
+            <View key={`${item?.id}-${index}`} style={styles.container}>
+              <Image source={item.imagePath} style={styles.image} />
               <View style={{flex: 3}}>
                 <View style={{flex: 1}}>
-                  <Text
-                    style={styles.nameText}>
-                    {item?.name}
-                  </Text>
+                  <Text style={styles.nameText}>{item?.name}</Text>
                 </View>
                 <View style={styles.priceView}>
-                  <Text
-                    style={styles.priceText}>
-                    {item?.price}
-                  </Text>
-                  <Text
-                    style={styles.currencyText}>
-                    {item?.currency}
-                  </Text>
+                  <Text style={styles.priceText}>{item?.price}</Text>
+                  <Text style={styles.currencyText}>{item?.currency}</Text>
                 </View>
-                <View
-                  style={styles.sizeView}>
-                  <Text
-                    style={styles.sizeText}>
-                    {item?.size}
-                  </Text>
-                  <Text
-                    style={styles.totalText}>
-                    {item?.total}
-                  </Text>
+                <View style={styles.sizeView}>
+                  <Text style={styles.sizeText}>{item?.size}</Text>
+                  <Text style={styles.totalText}>{item?.total}</Text>
                 </View>
               </View>
               <TouchableOpacity
                 style={styles.touchableOpacity}
                 onPress={() => removeItemFromCart(item.id, item.size)}>
-                <Text
-                  style={styles.xBtnText}>
-                  X
-                </Text>
+                <Text style={styles.xBtnText}>X</Text>
               </TouchableOpacity>
             </View>
           ))
         ) : (
-          <Text style={styles.noItemText}>
-            No Item Available
-          </Text>
+          <Text style={styles.noItemText}>No Item Available</Text>
         )}
         <View style={styles.textInputView}>
           <TextInput
@@ -90,9 +65,7 @@ export default function Cart() {
         <TouchableOpacity
           style={styles.touchableOpacity2}
           onPress={() => navigation.navigate('Shipping')}>
-          <Text style={styles.shippingText}>
-            Go to Shipping
-          </Text>
+          <Text style={styles.shippingText}>Go to Shipping</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -100,12 +73,11 @@ export default function Cart() {
 }
 
 const styles = StyleSheet.create({
-  safeAreaView:{
+  safeAreaView: {
     flex: 1,
     backgroundColor: '#FFFFFF',
   },
-  container:{
-    
+  container: {
     flexDirection: 'row',
     flex: 8,
     padding: 15,
@@ -113,23 +85,23 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderColor: '#C4C4C4',
   },
-  image:{
+  image: {
     flex: 5,
-    marginRight: 10
+    marginRight: 10,
   },
-  nameText:{
+  nameText: {
     fontSize: 16,
     fontWeight: 'bold',
     color: '#6E7179',
     paddingTop: 15,
     lineHeight: 20,
   },
-  priceView:{
-    flex: 1, 
-    flexDirection: 'row', 
-    marginTop: -10
+  priceView: {
+    flex: 1,
+    flexDirection: 'row',
+    marginTop: -10,
   },
-  priceText:{
+  priceText: {
     color: '#6E7179',
     fontWeight: 'bold',
     fontSize: 16,
@@ -137,7 +109,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     paddingTop: 0,
   },
-  currencyText:{
+  currencyText: {
     color: '#6E7179',
     fontWeight: 'bold',
     fontSize: 16,
@@ -145,12 +117,12 @@ const styles = StyleSheet.create({
     paddingLeft: 5,
     paddingTop: 0,
   },
-  sizeView:{
+  sizeView: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
   },
-  sizeText:{
+  sizeText: {
     flex: 2,
     fontSize: 20,
     fontWeight: 'bold',
@@ -160,7 +132,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginRight: 10,
   },
-  totalText:{
+  totalText: {
     flex: 2,
     fontSize: 20,
     fontWeight: 'bold',
@@ -169,7 +141,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     borderRadius: 5,
   },
-  touchableOpacity:{
+  touchableOpacity: {
     backgroundColor: '#989494',
     borderRadius: 25,
     alignItems: 'center',
@@ -177,21 +149,21 @@ const styles = StyleSheet.create({
     width: 30,
     height: 30,
   },
-  xBtnText:{
+  xBtnText: {
     color: 'white',
     fontSize: 18,
     textAlign: 'left',
     fontWeight: 'bold',
   },
-  noItemText:{
-    fontSize: 18, 
+  noItemText: {
+    fontSize: 18,
     color: '#000000',
   },
-  textInputView:{
+  textInputView: {
     paddingHorizontal: 15,
-    marginTop: 10
+    marginTop: 10,
   },
-  textInput:{
+  textInput: {
     backgroundColor: '#F4F4F4',
     borderWidth: 1,
     borderRadius: 25,
@@ -204,7 +176,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#000000',
   },
-  touchableOpacity2:{
+  touchableOpacity2: {
     borderRadius: 10,
     textAlign: 'center',
     backgroundColor: '#989494',
@@ -216,9 +188,9 @@ const styles = StyleSheet.create({
     marginLeft: 35,
     marginBottom: 30,
   },
-  shippingText:{
+  shippingText: {
     fontSize: 22,
     fontWeight: 'bold',
     color: '#F2F2F2',
   },
-})
+});

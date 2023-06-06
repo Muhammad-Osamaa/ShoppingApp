@@ -15,7 +15,7 @@ export default function BottomTabNavigation() {
       initialRouteName="Home"
       screenOptions={{
         tabBarStyle: {backgroundColor: '#FFFFFF'},
-        headerShown:false,
+        headerShown: false,
       }}>
       <Tab.Screen
         name="Home"
@@ -28,9 +28,9 @@ export default function BottomTabNavigation() {
               size={size}
             />
           ),
-          tabBarLabelStyle:{
-            color:'#6C6B6B'
-        },
+          tabBarLabelStyle: {
+            color: '#6C6B6B',
+          },
         }}
       />
       <Tab.Screen
@@ -44,8 +44,8 @@ export default function BottomTabNavigation() {
               size={size}
             />
           ),
-          tabBarLabelStyle:{
-              color:'#6C6B6B'
+          tabBarLabelStyle: {
+            color: '#6C6B6B',
           },
         }}
       />
@@ -60,9 +60,9 @@ export default function BottomTabNavigation() {
               size={size}
             />
           ),
-          tabBarLabelStyle:{
-            color:'#6C6B6B'
-        },
+          tabBarLabelStyle: {
+            color: '#6C6B6B',
+          },
         }}
       />
     </Tab.Navigator>

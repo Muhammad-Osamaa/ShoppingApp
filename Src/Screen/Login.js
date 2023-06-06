@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -9,31 +9,67 @@ import {
   Alert,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {loginApi} from '../services/postApi';
+import axios from 'axios';
 
 export default function Login(props) {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordVisible,setPasswordVisible] = useState(false);
-  const handleLogin = () => {
-    if (email === 'osama@gmail.com' && password === '12345') {
-      props.navigation.navigate('BottomTabNavigation');
-    } else {
-      Alert.alert('Login Failed', 'Invalid email or password');
+  const [passwordVisible, setPasswordVisible] = useState(false);
+
+  // useEffect(()=>{
+
+  // },[])
+
+  // const handleLogin = () => {
+  //   if (email === 'osama@gmail.com' && password === '12345') {
+  //     props.navigation.navigate('BottomTabNavigation');
+  //   } else {
+  //     loginApi().then((res)=>{
+  //       console.log("==>",res)
+  //     }).catch(err=>{
+  //       console.log("====>>",err)
+  //     })
+  //     Alert.alert  ('Login Failed', 'Invalid email or password');
+  //   }
+  // };
+
+  const handleLogin = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('email', email);
+      formData.append('password', password);
+      const response = await axios.post(
+        'http://192.168.86.203/safco-mis/employees/ReactData/usamatest.php',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      if (response.data.StatusCode === 200) {
+        props.navigation.navigate('BottomTabNavigation');
+      } else {
+        alert('Email or Password is incorrect');
+      }
+      console.log('response==>', response.data.StatusCode);
+    } catch (error) {
+      console.error(error); // Handle the error
     }
   };
-  const togglePasswordVisiblity = ()=>{
+
+  const togglePasswordVisiblity = () => {
     setPasswordVisible(!passwordVisible);
   };
+  // return <><Text>hello</Text></>
   return (
     <>
       <Image style={styles.image} source={require('../Image/bag.png')} />
       <View style={styles.container}>
         <KeyboardAwareScrollView style={styles.keyboardAwareScrollView}>
-          <View
-            style={styles.mainView}>
-            <Text style={styles.mainViewText}>
-              Log In
-            </Text>
+          <View style={styles.mainView}>
+            <Text style={styles.mainViewText}>Log In</Text>
           </View>
           <View style={styles.inputView}>
             <TextInput
@@ -51,10 +87,10 @@ export default function Login(props) {
               secureTextEntry={!passwordVisible}
               onChangeText={password => setPassword(password)}
             />
-            <TouchableOpacity 
-            style={styles.eyeIcon} 
-            onPress={togglePasswordVisiblity}>
-               <Image
+            <TouchableOpacity
+              style={styles.eyeIcon}
+              onPress={togglePasswordVisiblity}>
+              <Image
                 source={
                   passwordVisible
                     ? require('../Image/eyeOpen.png')
@@ -65,13 +101,10 @@ export default function Login(props) {
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
-            <Text style={styles.touchableOpacityText}>
-              Login
-            </Text>
+            <Text style={styles.touchableOpacityText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity>
-            <Text
-              style={styles.secondTouchableOpacity}>
+            <Text style={styles.secondTouchableOpacity}>
               Don't I have an account?
             </Text>
             <Text
@@ -86,8 +119,8 @@ export default function Login(props) {
   );
 }
 const styles = StyleSheet.create({
-  keyboardAwareScrollView:{
-    flex: 1, 
+  keyboardAwareScrollView: {
+    flex: 1,
     marginLeft: 5,
   },
   image: {
@@ -108,16 +141,16 @@ const styles = StyleSheet.create({
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
   },
-  mainView:{
+  mainView: {
     marginBottom: 30,
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginRight: 200,
   },
-  mainViewText:{
+  mainViewText: {
     fontSize: 30,
     fontWeight: 'bold',
-    color: '#989494'
+    color: '#989494',
   },
   inputView: {
     backgroundColor: '#FFFFFF',
@@ -134,33 +167,34 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 20,
   },
-  eyeIcon:{
-    position:'absolute',
-    top:13,
-    right:15,
-    height:24,
-    width:24,
-    alignItems:'center',
-    justifyContent:'center',
+  eyeIcon: {
+    position: 'absolute',
+    top: 13,
+    right: 15,
+    height: 20,
+    width: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  eyeIconImage:{
-    height:28,
-    width:36,
-    backgroundColor: '#FFFFFF'
+  eyeIconImage: {
+    height: 24,
+    width: 36,
+    padding: -15,
+    backgroundColor: '#FFFFFF',
   },
-  touchableOpacityText:{
+  touchableOpacityText: {
     fontWeight: 'bold',
     color: '#FFFFFF',
-    padding: 10
+    padding: 10,
   },
-  secondTouchableOpacity:{
+  secondTouchableOpacity: {
     alignItems: 'center',
     fontWeight: 'bold',
     color: '#000000',
     marginLeft: 70,
     marginTop: 20,
   },
-  onPressText:{
+  onPressText: {
     color: '#000000',
     fontWeight: 'bold',
     textAlign: 'center',
