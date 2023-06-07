@@ -34,5 +34,6 @@ export default function StackNavigation() {
         />
       </Stack.Navigator>
     </NavigationContainer>
+   
   );
 }

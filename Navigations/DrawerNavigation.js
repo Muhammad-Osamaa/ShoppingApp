@@ -1,26 +1,27 @@
 import React from 'react';
-import {
-  DrawerContentScrollView,
-  DrawerItem,
-  createDrawerNavigator,
-} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
+import { Button } from 'react-native';
 import Homepage from '../Src/Screen/Dashboard';
 import Profile from '../Src/Screen/Profile';
 import Setting from '../Src/Screen/Setting';
-import Login from '../Src/Screen/Login';
-import {StyleSheet, View, Text,TouchableHighlight } from 'react-native';
 import {useNavigation} from '@react-navigation/native';
-
-
+import Login from '../Src/Screen/Login';
 
 export default function DrawerNavigation() {
   const navigation = useNavigation();
   const Drawer = createDrawerNavigator();
-  
+  const handleLogout = () => {
+    navigation.dispatch(
+      CommonActions.reset({
+        index: 0,
+        routes: [{ name: 'Login' }],
+      })
+    );
+  };
   return (
     <Drawer.Navigator
       initialRouteName="Home"
@@ -80,6 +81,29 @@ export default function DrawerNavigation() {
           ),
         }}
       />
-    </Drawer.Navigator> 
+       <Drawer.Screen
+        name="Logout"
+        component={Login}
+        options={{
+          title: 'Logout',
+          drawerIcon: ({ focused, size }) => (
+            <Ionicons
+              name="log-out"
+              size={size}
+              color={focused ? '#F4F4F4' : '#000000'}
+            />
+          ),
+          drawerLabelStyle: {
+            fontSize: 16,
+            fontWeight: 'bold',
+          },
+          drawerItemStyle: {
+            marginTop: 20,
+          },
+          drawerLabel: 'Logout',
+          onPress: handleLogout,
+        }}
+      />
+    </Drawer.Navigator>
   );
 }
