@@ -1,6 +1,5 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import Homepage from '../Src/Screen/Dashboard';
 import Cart from '../Src/Screen/Cart';
 import User from '../Src/Screen/User';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';

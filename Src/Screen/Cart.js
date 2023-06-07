@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import CartContext from '../Components/Context/CartContext';
 import {useNavigation} from '@react-navigation/native';
+import CounterSize from './CounterSize';
 
 export default function Cart() {
   const {cartItems, removeItemFromCart} = useContext(CartContext);
@@ -44,7 +45,9 @@ export default function Cart() {
                   <Text style={styles.sizeText}>{item?.size}</Text>
                   <Text style={styles.totalText}>{item?.total}</Text>
                 </View>
+                {/* <CounterSize/> */}
               </View>
+              
               <TouchableOpacity
                 style={styles.touchableOpacity}
                 onPress={() => removeItemFromCart(item.id, item.size)}>

@@ -8,13 +8,44 @@ import {
   Text,
   TouchableOpacity,
 } from 'react-native';
+import axios from 'axios';
 export default function Register(props) {
   const [email, setEmail] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [passwordVisible,setPasswordVisible]= useState(false);
+  const [passwordVisible, setPasswordVisible] = useState(false);
 
-  const togglePasswordVisiblity =()=>{
+  const handleRegister = async () => {
+    try {
+      const formData = new FormData();
+      formData.append('username', username);
+      formData.append('email', email);
+      formData.append('password', password);
+      const response = await axios.post(
+        'http://192.168.86.203/safco-mis/employees/ReactData/usamatestregsiter.php',
+        formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+          },
+        },
+      );
+      if (response.data.StatusCode === 200) {
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        setPasswordVisible(false);
+        props.navigation.navigate('Login');
+      } else {
+        alert('Email or Password is empty');
+      }
+      console.log('response==>', response.data.StatusCode);
+    } catch (error) {
+      console.error('catch error-->', error); // Handle the error
+    }
+  };
+
+  const togglePasswordVisiblity = () => {
     setPasswordVisible(!passwordVisible);
   };
   return (
@@ -52,36 +83,28 @@ export default function Register(props) {
               secureTextEntry={!passwordVisible}
               onChangeText={password => setPassword(password)}
             />
-            <TouchableOpacity 
-            style={styles.eyeIcon}
-            onPress={togglePasswordVisiblity}>
+            <TouchableOpacity
+              style={styles.eyeIcon}
+              onPress={togglePasswordVisiblity}>
               <Image
                 source={
                   passwordVisible
-                  ? require('../Image/eyeOpen.png')
-                  : require('../Image/eyeClosed.png')
+                    ? require('../Image/eyeOpen.png')
+                    : require('../Image/eyeClosed.png')
                 }
                 style={styles.eyeIconImage}
               />
             </TouchableOpacity>
           </View>
 
-          <TouchableOpacity style={styles.registerBtn}>
-            <Text
-              onPress={() => props.navigation.navigate('Login')}
-              style={styles.onPressText}>
-              Register
-            </Text>
+          <TouchableOpacity style={styles.registerBtn} onPress={handleRegister}>
+            <Text style={styles.onPressText}>Register</Text>
           </TouchableOpacity>
-          <TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
             <Text style={styles.touchableOpacityText}>
               Already have an account?
             </Text>
-            <Text
-              onPress={() => props.navigation.navigate('Login')}
-              style={styles.loginText}>
-              Login
-            </Text>
+            <Text style={styles.loginText}>Login</Text>
           </TouchableOpacity>
         </KeyboardAwareScrollView>
       </View>
@@ -137,7 +160,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     marginLeft: 125,
   },
-  loginText:{
+  loginText: {
     fontWeight: 'bold',
     color: '#000000',
     textAlign: 'center',
@@ -160,20 +183,20 @@ const styles = StyleSheet.create({
     padding: 10,
     marginLeft: 20,
   },
-  eyeIcon:{
-    position:'absolute',
-    top:13,
-    right:15,
-    height:24,
-    width:24,
-    alignItems:'center',
-    justifyContent:'center',
+  eyeIcon: {
+    position: 'absolute',
+    top: 13,
+    right: 15,
+    height: 24,
+    width: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  eyeIconImage:{
-    height:28,
-    width:36,
-    padding:-15,
-    backgroundColor: '#FFFFFF'
+  eyeIconImage: {
+    height: 28,
+    width: 36,
+    padding: -15,
+    backgroundColor: '#FFFFFF',
   },
   registerBtn: {
     width: '100%',

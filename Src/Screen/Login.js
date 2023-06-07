@@ -9,7 +9,6 @@ import {
   Alert,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
-import {loginApi} from '../services/postApi';
 import axios from 'axios';
 
 export default function Login(props) {
@@ -41,6 +40,7 @@ export default function Login(props) {
       const formData = new FormData();
       formData.append('email', email);
       formData.append('password', password);
+      console.log(formData)
       const response = await axios.post(
         'http://192.168.86.203/safco-mis/employees/ReactData/usamatest.php',
         formData,
@@ -58,11 +58,11 @@ export default function Login(props) {
         passwordInputRef.current.clear();
         props.navigation.navigate('BottomTabNavigation');
       } else {
-        alert('Email or Password is incorrect');
+        alert(response.data.Msg);
       }
       console.log('response==>', response.data.StatusCode);
     } catch (error) {
-      console.error(error); // Handle the error
+      console.error("catch error-->",error); // Handle the error
     }
   };
 
