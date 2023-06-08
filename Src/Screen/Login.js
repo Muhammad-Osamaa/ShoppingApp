@@ -6,7 +6,6 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
-  Alert,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import axios from 'axios';
@@ -40,7 +39,7 @@ export default function Login(props) {
       const formData = new FormData();
       formData.append('email', email);
       formData.append('password', password);
-      console.log(formData)
+      console.log(formData);
       const response = await axios.post(
         'http://192.168.86.203/safco-mis/employees/ReactData/usamatest.php',
         formData,
@@ -62,14 +61,14 @@ export default function Login(props) {
       }
       console.log('response==>', response.data.StatusCode);
     } catch (error) {
-      console.error("catch error-->",error); // Handle the error
+      console.error('catch error-->', error); // Handle the error
     }
   };
 
   const togglePasswordVisiblity = () => {
     setPasswordVisible(!passwordVisible);
   };
-  // return <><Text>hello</Text></>
+
   return (
     <>
       <Image style={styles.image} source={require('../Image/bag.png')} />
