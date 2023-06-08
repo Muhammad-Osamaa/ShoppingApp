@@ -3,7 +3,6 @@ import {createDrawerNavigator} from '@react-navigation/drawer';
 import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import AntDesign from 'react-native-vector-icons/AntDesign';
-import Ionicons from 'react-native-vector-icons/Ionicons';
 import {Button} from 'react-native';
 import Homepage from '../Src/Screen/Dashboard';
 import Profile from '../Src/Screen/Profile';

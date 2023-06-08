@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   StyleSheet,
   Text,
@@ -49,6 +49,7 @@ export default function Login(props) {
           },
         },
       );
+      
       if (response.data.StatusCode === 200) {
         setEmail('');
         setPassword('');
