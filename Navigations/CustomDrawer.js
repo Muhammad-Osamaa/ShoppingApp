@@ -18,33 +18,32 @@ const CustomDrawer = props => {
     <View style={styles.container}>
       <DrawerContentScrollView
         {...props}
-        contentContainerStyle={{backgroundColor: '#C4C4C4'}}>
+        contentContainerStyle={{backgroundColor: '#F4F4F4'}}>
         <ImageBackground
-          source={require('../Src/Image/dot_circle.jpg')}
+          source={require('../Src/Image/whiteBalls.jpg')}
           style={styles.imageBackground}>
           <Image
-            // source={require('../Src/Image/thumb_coin.jpg')}
+             source={require('../Src/Image/thumb_coin.jpg')}
             style={styles.image}
           />
-          {/* <Text
-            style={styles.firstText}>
+          <Text
+            style={styles.nameText}>
             MuhammaD OsaMa
-          </Text> */}
+          </Text>
         </ImageBackground>
         <DrawerItemList {...props} />
       </DrawerContentScrollView>
-      <View style={styles.mainView}>
+      <View style={styles.footer}>
         <TouchableOpacity
           onPress={handleLogout}
-          style={styles.touchableOpacity}>
-          <View style={styles.secondView}>
+          style={styles.logoutButton}>
             <FontAwesome
               name="sign-out"
               size={20}
-              color={isFocused ? '#F4F4F4' : '#000000'}
+              color={isFocused ? '#000000' : '#F4F4F4'}
+              style={styles.logoutIcon}
             />
-            <Text style={styles.secondText}>LogOut</Text>
-          </View>
+            <Text style={styles.logoutText}>LogOut</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -56,37 +55,41 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   imageBackground: {
-    padding: 20,
+    paddingTop: 40,
+    paddingBottom: 20,
+    paddingHorizontal: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   image: {
     height: 80,
     width: 80,
     borderRadius: 40,
-    alignSelf: 'center',
+    marginRight: 20,
   },
-  mainView: {
-    padding: 20,
+  nameText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+  },
+  footer: {
     borderTopWidth: 1,
-    borderTopColor: '#ccc',
-    marginBottom: 20,
+    borderTopColor: '#E6E6E6',
+    paddingVertical: 20,
+    paddingHorizontal: 20,
   },
-  secondView: {
+
+  logoutButton: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 10,
   },
-  touchableOpacity: {
-    paddingVertical: 15,
+  logoutIcon: {
+    marginRight: 10,
   },
-  firstText: {
-    color: '#000000',
-    fontSize: 18,
-    marginTop: 50,
-    fontFamily: 'Roboto-Medium',
-  },
-  secondText: {
-    fontSize: 15,
+  logoutText: {
+    fontSize: 16,
     fontWeight: 'bold',
-    fontFamily: 'Roboto-Medium',
-    marginLeft: 5,
+    color: '#000000',
   },
 });
