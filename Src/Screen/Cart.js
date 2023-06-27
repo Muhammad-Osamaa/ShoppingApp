@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import CartContext from '../Components/Context/CartContext';
 import {useNavigation} from '@react-navigation/native';
-import CounterSize from './CounterSize';
 
 export default function Cart() {
   const {cartItems, removeItemFromCart} = useContext(CartContext);

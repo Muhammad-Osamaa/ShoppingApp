@@ -17,7 +17,6 @@ const Card = ({item}) => {
             <Text style={styles.text}>{item.name}</Text>
             <View style={{flexDirection: 'row'}}>
               <Text style={styles.secondText}>{item.price}</Text>
-
               <Text style={styles.thirdText}>{item.currency}</Text>
             </View>
           </View>
