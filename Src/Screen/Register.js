@@ -22,7 +22,7 @@ export default function Register(props) {
       formData.append('email', email);
       formData.append('password', password);
       const response = await axios.post(
-        'http://192.168.86.203/safco-mis/employees/ReactData/usamatestregsiter.php',
+        'http://localhost/shopping/api/insertapi.php',
         formData,
         {
           headers: {
@@ -149,7 +149,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1.5,
     borderColor: '#C4C4C4',
-    borderWidth: 1.5,
     borderTopRightRadius: 25,
     borderTopLeftRadius: 25,
     marginTop: 30,

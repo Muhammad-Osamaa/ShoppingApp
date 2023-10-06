@@ -22,10 +22,10 @@ const CustomDrawer = props => {
         <ImageBackground
           source={require('../Src/Image/whiteBalls.jpg')}
           style={styles.imageBackground}>
-          <Image
+          {/* <Image
              source={require('../Src/Image/thumb_coin.jpg')}
             style={styles.image}
-          />
+          /> */}
           <Text
             style={styles.nameText}>
             MuhammaD OsaMa
@@ -53,24 +53,19 @@ export default CustomDrawer;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+   
   },
   imageBackground: {
-    paddingTop: 40,
-    paddingBottom: 20,
-    paddingHorizontal: 20,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  image: {
-    height: 80,
-    width: 80,
-    borderRadius: 40,
-    marginRight: 20,
+    paddingVertical:80
+      
   },
   nameText: {
     fontSize: 18,
     fontWeight: 'bold',
     color: '#FFFFFF',
+    paddingLeft:25,
+    position:'absolute',
+    paddingTop:20,
   },
   footer: {
     borderTopWidth: 1,

@@ -18,14 +18,15 @@ export default function DrawerNavigation() {
       drawerContent={props => <CustomDrawer {...props} />}
       initialRouteName="Home"
       screenOptions={{
-        headerShown: false,
+        headerShown: true,
+
         drawerActiveBackgroundColor: '#C4C4C4',
         drawerActiveTintColor: '#F4F4F4',
         drawerInactiveTintColor: '#000000',
         drawerLabelStyle: {
           fontSize: 15,
-          marginLeft: -25,
-          fontFamily: 'Robot-Medium',
+          fontFamily: 'Roboto-Medium',
+          fontWeight: 'bold',
         },
         drawerIconStyle: {
           marginRight: -5,

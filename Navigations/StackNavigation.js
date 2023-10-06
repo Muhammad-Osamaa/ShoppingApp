@@ -14,11 +14,10 @@ const Stack = createStackNavigator();
 export default function StackNavigation() {
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName="Login">
-        <Stack.Screen name="Login" component={Login}></Stack.Screen>
-        <Stack.Screen name="Register" component={Register}></Stack.Screen>
+      <Stack.Navigator screenOptions={{headerShown: false}}>  
+        {/*initialRouteName="Login">
+        // <Stack.Screen name="Login" component={Login}></Stack.Screen>
+      // <Stack.Screen name="Register" component={Register}></Stack.Screen>*/}
         <Stack.Screen
           name="BottomTabNavigation"
           component={BottomTabNavigation}
@@ -34,6 +33,5 @@ export default function StackNavigation() {
         />
       </Stack.Navigator>
     </NavigationContainer>
-   
   );
 }

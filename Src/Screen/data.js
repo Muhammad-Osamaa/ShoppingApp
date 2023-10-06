@@ -132,5 +132,4 @@ data.push(card13);
 data.push(card14);
 data.push(card15);
 
-
 export default data;
